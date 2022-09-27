@@ -1,18 +1,18 @@
 package com.votingforlunch.model;
 
+import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+@NoArgsConstructor
+@Setter
+@Getter
 public class AbstractBaseEntity {
     protected Integer id;
 
     protected AbstractBaseEntity(Integer id) {
         this.id = id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getId() {
-        return id;
     }
 
     public boolean isNew() {
