@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.Set;
 
 @Data
@@ -18,6 +19,10 @@ public class User {
     private String lastName;
 
     private String password;
+
+    private boolean enabled = true;
+
+    private Date registered = new Date();
 
     private Set<Role> roles;
 }
