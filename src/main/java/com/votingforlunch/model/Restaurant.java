@@ -9,7 +9,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Restaurant {
+public class Restaurant  extends AbstractBaseEntity{
     private String restaurantName;
     private Set<Dish> dishes;
     private int voteCounter;

@@ -10,7 +10,7 @@ import java.time.LocalDate;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Dish {
+public class Dish extends AbstractBaseEntity {
     private String dishName;
     private LocalDate date;
     private double price;

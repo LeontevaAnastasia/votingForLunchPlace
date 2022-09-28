@@ -1,9 +1,7 @@
 package com.votingforlunch.repository;
 
 import com.votingforlunch.model.Dish;
-import com.votingforlunch.model.Restaurant;
-
-import java.util.Collection;
+import java.util.List;
 
 public interface DishRepository {
     Dish save( Dish  restaurant);
@@ -15,5 +13,5 @@ public interface DishRepository {
     Dish get(int id);
 
 
-    Collection<Dish> getAllDishes();
+    List<Dish> getAll();
 }
