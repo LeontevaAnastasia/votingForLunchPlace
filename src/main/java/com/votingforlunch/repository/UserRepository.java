@@ -1,18 +1,11 @@
 package com.votingforlunch.repository;
 
 import com.votingforlunch.model.User;
+import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
-public interface UserRepository {
+public interface UserRepository extends JpaRepository<User, Integer> {
 
-    User save(User user);
 
-    boolean delete(int id);
-
-    User get(int id);
-
-    User getByEmail(String email);
-
-    List<User> getAll();
 }

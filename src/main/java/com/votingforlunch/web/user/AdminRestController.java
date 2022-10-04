@@ -22,17 +22,8 @@ public class AdminRestController extends AbstractUserController {
     }
 
     @Override
-    public void delete(int id) {
-        super.delete(id);
-    }
-
-    @Override
     public void update(User user, int id) {
         super.update(user, id);
     }
 
-    @Override
-    public User getByMail(String email) {
-        return super.getByMail(email);
-    }
 }

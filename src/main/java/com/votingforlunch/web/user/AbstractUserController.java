@@ -32,10 +32,6 @@ public abstract class AbstractUserController {
         return userService.create(user);
     }
 
-    public void delete(int id) {
-        log.info("delete {}", id);
-        userService.delete(id);
-    }
 
     public void update(User user, int id) {
         log.info("update {} with id={}", user, id);
@@ -43,9 +39,5 @@ public abstract class AbstractUserController {
         userService.update(user);
     }
 
-    public User getByMail(String email) {
-        log.info("getByEmail {}", email);
-        return userService.getByEmail(email);
-    }
 
 }
