@@ -20,13 +20,11 @@ public class VotingForLunchPlaceApplication implements ApplicationRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(VotingForLunchPlaceApplication.class, args);
-        System.out.println();
+
     }
 
     @Override
     public void run(ApplicationArguments args) {
-        userRepository.save(new User("User_First", "user@gmail.com", "password", LocalDate.now(), true, Set.of(Role.ROLE_USER)));
-        userRepository.save(new User("Admin_First", "admin@javaops.ru",  "admin", LocalDate.now(), true,Set.of(Role.ROLE_USER, Role.ROLE_ADMIN)));
-        System.out.println(userRepository.findAll());
+           System.out.println(userRepository.findAll());
     }
 }

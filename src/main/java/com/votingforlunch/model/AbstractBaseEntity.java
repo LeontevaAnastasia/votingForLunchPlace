@@ -2,6 +2,7 @@ package com.votingforlunch.model;
 
 import lombok.*;
 import org.springframework.data.domain.Persistable;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 
@@ -10,7 +11,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Access(AccessType.FIELD)
-public class AbstractBaseEntity implements Persistable<Integer> {
+public class AbstractBaseEntity extends AbstractPersistable<Integer> {
     public static final int START_SEQ = 100000;
 
     @Id

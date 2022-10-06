@@ -3,6 +3,7 @@ package com.votingforlunch.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.springframework.data.jpa.domain.AbstractPersistable;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -21,7 +22,7 @@ import java.util.Set;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
 @ToString(callSuper = true, exclude = {"password"})
-public class User extends AbstractNamedEntity {
+public class User extends AbstractBaseEntity{
 
     @Column(name = "name")
     @Size(max = 128)
