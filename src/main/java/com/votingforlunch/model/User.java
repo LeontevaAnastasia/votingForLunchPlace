@@ -43,7 +43,6 @@ public class User extends AbstractBaseEntity{
 
     @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
     @NotNull
-    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private LocalDate registered;
 
     @Enumerated(EnumType.STRING)
