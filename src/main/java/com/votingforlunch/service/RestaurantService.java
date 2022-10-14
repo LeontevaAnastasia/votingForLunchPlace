@@ -20,11 +20,11 @@ public class RestaurantService {
     }
 
     public Restaurant get(int id) {
-        return checkNotFoundWithId(restaurantRepository.get(id), id);
+        return checkNotFoundWithId(restaurantRepository.getReferenceById(id), id);
     }
 
     public List<Restaurant> getAll() {
-        return restaurantRepository.getAll();
+        return restaurantRepository.findAll();
     }
 
     public void update(Restaurant restaurant) {

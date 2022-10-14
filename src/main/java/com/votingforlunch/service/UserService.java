@@ -2,10 +2,11 @@ package com.votingforlunch.service;
 
 import com.votingforlunch.model.User;
 import com.votingforlunch.repository.UserRepository;
+import com.votingforlunch.util.ValidationUtil;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
-import static com.votingforlunch.util.ValidationUtil.checkNotFound;
 import static com.votingforlunch.util.ValidationUtil.checkNotFoundWithId;
 
 public class UserService {
@@ -20,6 +21,15 @@ public class UserService {
         return checkNotFoundWithId(repository.getReferenceById(id), id);
     }
 
+    public User findByEmailIgnoringCase(String email){
+        return ValidationUtil.checkNotFound(repository.findByEmailIgnoreCase(email), "email=" + email);
+
+    }
+
+    public void delete(int id) {
+
+        checkNotFoundWithId(repository.delete(id),id);
+    }
 
     public List<User> getAll() {
         return repository.findAll();

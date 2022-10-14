@@ -19,7 +19,7 @@ public class DishRestController {
     }
 
     public Dish get(int id) {
-        return dishService.get(id);
+        return dishService.getById(id);
     }
 
     public void delete(int id) {

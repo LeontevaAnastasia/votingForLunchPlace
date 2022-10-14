@@ -32,11 +32,19 @@ public abstract class AbstractUserController {
         return userService.create(user);
     }
 
-
+    public void delete(int id){
+        log.info("delete with id={}", id);
+        userService.delete(id);
+    }
     public void update(User user, int id) {
         log.info("update {} with id={}", user, id);
         assureIdConsistent(user, id);
         userService.update(user);
+    }
+
+    public User findByEmailIgnoringCase(String email){
+        log.info("find user with email={}", email);
+        return userService.findByEmailIgnoringCase(email);
     }
 
 

@@ -2,35 +2,45 @@ package com.votingforlunch.web.restaurant;
 
 import com.votingforlunch.model.Restaurant;
 import com.votingforlunch.model.User;
+import com.votingforlunch.service.RestaurantService;
 import com.votingforlunch.web.user.AbstractUserController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
-public class RestaurantRestController extends AbstractRestaurantController {
+public class RestaurantRestController{
 
-    @Override
+    private final Logger log = LoggerFactory.getLogger(getClass());
+    private RestaurantService restaurantService;
+
+
     public List<Restaurant> getAll() {
-        return super.getAll();
+        log.info("getAll restaurants");
+        return restaurantService.getAll();
     }
 
-    @Override
+
     public Restaurant get(int id) {
-        return super.get(id);
+        log.info(("get restaurant {}"), id);
+        return restaurantService.get(id);
     }
 
-    @Override
+
     public Restaurant create(Restaurant restaurant) {
-        return super.create(restaurant);
+        log.info("create restaurant {}", restaurant);
+        return restaurantService.create(restaurant);
     }
 
-    @Override
+
     public void delete(int id) {
-        super.delete(id);
+        log.info("delete restaurant {}", id);
+        restaurantService.delete(id);
     }
 
-    @Override
     public void update(Restaurant restaurant) {
-        super.update(restaurant);
+        log.info("update restaurant {}", restaurant);
+        restaurantService.update(restaurant);
     }
 }
 

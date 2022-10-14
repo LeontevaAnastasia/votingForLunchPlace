@@ -1,19 +1,13 @@
 package com.votingforlunch.repository;
 
 import com.votingforlunch.model.Restaurant;
-
-import java.util.Collection;
-import java.util.List;
-
-public interface RestaurantRepository {
-    Restaurant save(Restaurant restaurant);
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 
-    boolean delete(int id);
+public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
 
-
-    Restaurant get(int id);
-
-
-    List<Restaurant> getAll();
+    @Query("delete from Restaurant r where r.id=:id")
+    boolean delete(@Param("id") int id);
 }

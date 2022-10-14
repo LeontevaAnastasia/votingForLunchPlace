@@ -26,4 +26,13 @@ public class AdminRestController extends AbstractUserController {
         super.update(user, id);
     }
 
+    public void delete(int id){
+
+        super.delete(id);
+    }
+
+    public User findByEmailIgnoringCase(String email){
+        return super.findByEmailIgnoringCase(email);
+    }
+
 }

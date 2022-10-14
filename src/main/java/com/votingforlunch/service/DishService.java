@@ -19,12 +19,12 @@ public class DishService {
         checkNotFoundWithId(dishRepository.delete(id), id);
     }
 
-    public Dish get(int id) {
-        return checkNotFoundWithId(dishRepository.get(id), id);
+    public Dish getById(int id) {
+        return checkNotFoundWithId(dishRepository.getReferenceById(id), id);
     }
 
     public List<Dish> getAll() {
-        return dishRepository.getAll();
+        return dishRepository.findAll();
     }
 
     public void update(Dish dish) {

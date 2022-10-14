@@ -1,17 +1,15 @@
 package com.votingforlunch.repository;
 
 import com.votingforlunch.model.Dish;
-import java.util.List;
-
-public interface DishRepository {
-    Dish save( Dish  restaurant);
-
-
-    boolean delete(int id);
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 
-    Dish get(int id);
+public interface DishRepository extends JpaRepository<Dish, Integer> {
+    @Query("delete from Dish d where d.id=:id")
+    boolean delete(@Param("id") int id);
 
 
-    List<Dish> getAll();
+
 }
