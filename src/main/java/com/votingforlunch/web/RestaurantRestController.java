@@ -1,4 +1,4 @@
-package com.votingforlunch.web.restaurant;
+package com.votingforlunch.web;
 
 import com.votingforlunch.model.Restaurant;
 import com.votingforlunch.model.User;

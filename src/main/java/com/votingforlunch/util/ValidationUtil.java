@@ -2,6 +2,7 @@ package com.votingforlunch.util;
 
 import com.votingforlunch.model.AbstractBaseEntity;
 import com.votingforlunch.util.exception.NotFoundException;
+import org.springframework.dao.DataAccessException;
 
 public class ValidationUtil {
 
@@ -40,5 +41,15 @@ public class ValidationUtil {
         }
     }
 
+    public static void checkUniqueNameForRestaurant(boolean isFound) {
+        if (isFound) {
+            throw new DataAccessException("Dish name is not unique for this restaurant.") {
+                @Override
+                public String getMessage() {
+                    return super.getMessage();
+                }
+            };
+        }
+    }
 
 }

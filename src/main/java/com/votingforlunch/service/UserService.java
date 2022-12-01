@@ -13,6 +13,7 @@ public class UserService {
     private UserRepository repository;
 
     public User create(User user) {
+        Assert.notNull(user, "user must not be null");
         return repository.save(user);
     }
 
@@ -22,6 +23,7 @@ public class UserService {
     }
 
     public User findByEmailIgnoringCase(String email){
+        Assert.notNull(email, "email must not be null");
         return ValidationUtil.checkNotFound(repository.findByEmailIgnoreCase(email), "email=" + email);
 
     }
@@ -36,6 +38,7 @@ public class UserService {
     }
 
     public void update(User user) {
+        Assert.notNull(user, "user must not be null");
         checkNotFoundWithId(repository.save(user), user.getId());
     }
 }

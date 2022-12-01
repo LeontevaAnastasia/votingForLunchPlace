@@ -1,11 +1,9 @@
-package com.votingforlunch.web.dish;
+package com.votingforlunch.web;
 
 import com.votingforlunch.model.Dish;
 import com.votingforlunch.service.DishService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.Collection;
 import java.util.List;
 
 public class DishRestController {
@@ -18,16 +16,19 @@ public class DishRestController {
         this.dishService = dishService;
     }
 
-    public Dish get(int id) {
-        return dishService.getById(id);
+    public Dish get(int id, int restId) {
+        log.info(("get dish {}"), id);
+        return dishService.getById(id, restId);
     }
 
-    public void delete(int id) {
-        dishService.delete(id);
+    public void delete(int id, int restId) {
+        log.info(("delete dish {}"), id);
+        dishService.delete(id,restId);
     }
 
-    public List<Dish> getAll() {
-        return dishService.getAll();
+    public List<Dish> getAll(int restId) {
+        log.info("getAll dishes");
+        return dishService.getAll(restId);
     }
 
 

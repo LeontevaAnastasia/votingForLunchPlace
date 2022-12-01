@@ -1,5 +1,6 @@
 package com.votingforlunch.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.springframework.data.domain.Persistable;
 import org.springframework.data.jpa.domain.AbstractPersistable;
@@ -19,6 +20,8 @@ public class AbstractBaseEntity implements Persistable<Integer> {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Integer id;
 
+
+    @JsonIgnore
     public boolean isNew() {
         return this.id == null;
     }

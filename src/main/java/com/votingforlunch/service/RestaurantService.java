@@ -3,6 +3,7 @@ package com.votingforlunch.service;
 import com.votingforlunch.model.Restaurant;
 import com.votingforlunch.model.User;
 import com.votingforlunch.repository.RestaurantRepository;
+import org.springframework.util.Assert;
 
 import java.util.List;
 
@@ -12,6 +13,7 @@ public class RestaurantService {
     RestaurantRepository restaurantRepository;
 
     public Restaurant create(Restaurant restaurant) {
+        Assert.notNull(restaurant, "Restaurant must not be null.");
         return restaurantRepository.save(restaurant);
     }
 
@@ -28,6 +30,7 @@ public class RestaurantService {
     }
 
     public void update(Restaurant restaurant) {
+        Assert.notNull(restaurant, "Restaurant must not be null.");
         checkNotFoundWithId(restaurantRepository.save(restaurant), restaurant.getId());
     }
 }

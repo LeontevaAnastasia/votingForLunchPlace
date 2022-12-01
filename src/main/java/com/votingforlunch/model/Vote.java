@@ -10,9 +10,9 @@ import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
 
-@NoArgsConstructor
-@Data
 @Entity
+@Data
+@NoArgsConstructor
 @Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "created"}, name = "vote_unique_user_created_idx")})
 public class Vote extends AbstractBaseEntity{
 
