@@ -1,9 +1,11 @@
 package com.votingforlunch.web.user;
 import com.votingforlunch.model.User;
 import com.votingforlunch.web.user.AbstractUserController;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
+@Controller
 public class AdminRestController extends AbstractUserController {
 
     @Override

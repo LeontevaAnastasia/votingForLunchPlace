@@ -4,12 +4,14 @@ import com.votingforlunch.model.User;
 import com.votingforlunch.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
 import static com.votingforlunch.util.ValidationUtil.assureIdConsistent;
 import static com.votingforlunch.util.ValidationUtil.checkNew;
 
+@Controller
 public abstract class AbstractUserController {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());

@@ -6,9 +6,11 @@ import com.votingforlunch.service.RestaurantService;
 import com.votingforlunch.web.user.AbstractUserController;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Controller;
 
 import java.util.List;
 
+@Controller
 public class RestaurantRestController{
 
     private final Logger log = LoggerFactory.getLogger(getClass());

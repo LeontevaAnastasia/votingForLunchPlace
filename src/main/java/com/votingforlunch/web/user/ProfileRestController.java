@@ -2,9 +2,11 @@ package com.votingforlunch.web.user;
 
 import com.votingforlunch.model.User;
 import com.votingforlunch.web.user.AbstractUserController;
+import org.springframework.stereotype.Controller;
 
 import static com.votingforlunch.web.SecurityUtil.authUserId;
 
+@Controller
 public class ProfileRestController extends AbstractUserController {
 
     public User get() {

@@ -3,12 +3,14 @@ package com.votingforlunch.service;
 import com.votingforlunch.model.User;
 import com.votingforlunch.repository.UserRepository;
 import com.votingforlunch.util.ValidationUtil;
+import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
 import java.util.List;
 
 import static com.votingforlunch.util.ValidationUtil.checkNotFoundWithId;
 
+@Service
 public class UserService {
     private UserRepository repository;
 
