@@ -6,18 +6,15 @@ import org.hibernate.Hibernate;
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-import java.util.Objects;
 import java.util.Set;
 
 @Entity
 @Table(name = "restaurants")
 @Getter
 @Setter
-@ToString
 
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @AllArgsConstructor
-public class Restaurant  extends AbstractBaseEntity{
+public class Restaurant  extends AbstractBaseEntity {
 
     @Column(name = "restaurant_name")
     @Size(max = 128)
@@ -30,19 +27,22 @@ public class Restaurant  extends AbstractBaseEntity{
     private String address;
 
     @Enumerated(EnumType.STRING)
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private Set<Dish> dishes;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        Restaurant that = (Restaurant) o;
-        return id != null && Objects.equals(id, that.id);
+    public Restaurant() {
     }
 
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
+    public Restaurant(Restaurant r) {
+        this(r.getId(), r.restaurantName, r.address);
     }
+
+    public Restaurant(Integer id, String restaurantName, String address) {
+        super(id);
+        this.restaurantName = restaurantName;
+        this.address = address;
+    }
+
+
+
 }

@@ -1,9 +1,7 @@
 package com.votingforlunch.model;
 
 
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.Range;
@@ -16,8 +14,8 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name = "dishes")
-@Data
-@NoArgsConstructor
+@Getter
+@Setter
 @AllArgsConstructor
 public class Dish extends AbstractBaseEntity {
 
@@ -39,4 +37,21 @@ public class Dish extends AbstractBaseEntity {
     @JoinColumn(name = "rest_id", referencedColumnName = "id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     Restaurant restaurant;
+
+    public Dish(){
+    }
+
+    public Dish(Integer id, String dishName, LocalDate date, Double price, Restaurant restaurant){
+        super(id);
+        this.dishName=dishName;
+        this.date=date;
+        this.price=price;
+        this.restaurant=restaurant;
+    }
+
+    public Dish(Dish d){
+        this(d.getId(),d.dishName,d.date,d.price,d.restaurant);
+
+    }
+
 }

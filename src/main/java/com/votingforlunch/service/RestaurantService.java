@@ -1,8 +1,8 @@
 package com.votingforlunch.service;
 
 import com.votingforlunch.model.Restaurant;
-import com.votingforlunch.model.User;
 import com.votingforlunch.repository.RestaurantRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -12,6 +12,8 @@ import static com.votingforlunch.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class RestaurantService {
+
+    @Autowired
     RestaurantRepository restaurantRepository;
 
     public Restaurant create(Restaurant restaurant) {

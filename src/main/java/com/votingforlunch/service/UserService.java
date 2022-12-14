@@ -3,6 +3,8 @@ package com.votingforlunch.service;
 import com.votingforlunch.model.User;
 import com.votingforlunch.repository.UserRepository;
 import com.votingforlunch.util.ValidationUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -12,6 +14,8 @@ import static com.votingforlunch.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
 public class UserService {
+
+    @Autowired
     private UserRepository repository;
 
     public User create(User user) {

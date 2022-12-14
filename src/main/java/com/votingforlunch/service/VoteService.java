@@ -7,6 +7,7 @@ import com.votingforlunch.repository.VoteRepository;
 import com.votingforlunch.to.VoteTo;
 import com.votingforlunch.util.ValidationUtil;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -19,17 +20,20 @@ import static org.slf4j.LoggerFactory.getLogger;
 
 @Service
 public class VoteService {
+    @Autowired
     VoteRepository voteRepository;
+
+    @Autowired
     RestaurantRepository restaurantRepository;
 
     private static final Logger log = getLogger(VoteService.class);
     private static final LocalTime votingDeadline = LocalTime.of(11, 0);
 
-    public Vote createOrUpdate(VoteTo voteTo, int userId) {
+    public Vote createOrUpdate(Vote vote, int userId) {
 
-        ValidationUtil.checkNotFoundWithId(restaurantRepository.getReferenceById(voteTo.getRestaurantId()), voteTo.getRestaurantId());
-        Assert.notNull(voteTo, "VoteTo must not be null.");
-        Vote vote = createNewFromTo(voteTo, userId);
+        ValidationUtil.checkNotFoundWithId(restaurantRepository.getReferenceById(vote.getRestaurantId()), vote.getRestaurantId());
+        Assert.notNull(vote, "VoteTo must not be null.");
+
 
         Vote existing = voteRepository.getByUserIdAndDate(userId, LocalDate.now()).orElse(null);
 

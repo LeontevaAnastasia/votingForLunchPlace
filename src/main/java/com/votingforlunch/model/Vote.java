@@ -8,14 +8,13 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDate;
-import java.util.Set;
 
 @Entity
 @Getter
 @Setter
 @AllArgsConstructor
 @ToString
-@NoArgsConstructor
+
 @Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "created"}, name = "vote_unique_user_created_idx")})
 public class Vote extends AbstractBaseEntity{
 
@@ -31,8 +30,13 @@ public class Vote extends AbstractBaseEntity{
     @NotNull
     private int restaurantId;
 
-    public Vote (Integer id, LocalDate registered, Integer userId, Integer restaurantId) {
+    public Vote(){
+
+    }
+
+    public Vote (Integer id, LocalDate date, Integer userId, Integer restaurantId) {
         super(id);
+        this.date=date;
         this.userId=userId;
         this.restaurantId = restaurantId;
     }
