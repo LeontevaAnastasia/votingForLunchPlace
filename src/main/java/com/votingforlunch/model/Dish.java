@@ -24,7 +24,7 @@ public class Dish extends AbstractBaseEntity {
     @NotBlank
     private String dishName;
 
-    @Column(name = "created", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
+    @Column(name = "created", nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_DATE", updatable = false)
     @NotNull
     private LocalDate date;
 

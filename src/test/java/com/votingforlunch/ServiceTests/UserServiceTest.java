@@ -1,12 +1,10 @@
 package com.votingforlunch.ServiceTests;
 
-import com.votingforlunch.MatcherFactory;
 import com.votingforlunch.UserTestData;
 import com.votingforlunch.model.Role;
 import com.votingforlunch.service.UserService;
-
-import com.votingforlunch.util.exception.NotFoundException;
 import org.hibernate.LazyInitializationException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -43,7 +41,7 @@ public class UserServiceTest extends AbstractServiceTest {
       @Test
     public void delete() {
         userService.delete(UserTestData.USER_ID1);
-        Assertions.assertThrows(NotFoundException.class, () -> userService.get(UserTestData.USER_ID1));
+          Assert.assertNull(userService.get(UserTestData.USER_ID1));
     }
 
     @Test(expected = LazyInitializationException.class)
@@ -52,10 +50,9 @@ public class UserServiceTest extends AbstractServiceTest {
         USER_MATCHER.assertMatch(user, userOne);
     }
 
-    @Test
+    @Test(expected = LazyInitializationException.class)
     public void getNotFound() {
-
-        assertThrows(NotFoundException.class, () -> userService.get(8475907));
+        Assert.assertNull(userService.get(NOT_FOUND));
     }
 
 

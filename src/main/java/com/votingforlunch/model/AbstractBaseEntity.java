@@ -2,8 +2,8 @@ package com.votingforlunch.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
+import org.hibernate.Hibernate;
 import org.springframework.data.domain.Persistable;
-import org.springframework.data.util.ProxyUtils;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Access(AccessType.FIELD)
-public class AbstractBaseEntity implements Persistable<Integer> {
+public abstract class AbstractBaseEntity implements Persistable<Integer> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,6 +25,7 @@ public class AbstractBaseEntity implements Persistable<Integer> {
     }
 
     @JsonIgnore
+    @Override
     public boolean isNew() {
         return this.id == null;
     }
@@ -42,7 +43,7 @@ public class AbstractBaseEntity implements Persistable<Integer> {
         if (this == o) {
             return true;
         }
-        if (o == null || !getClass().equals(ProxyUtils.getUserClass(o))) {
+        if (o == null || !getClass().equals(Hibernate.getClass(o))) {
             return false;
         }
         AbstractBaseEntity that = (AbstractBaseEntity) o;

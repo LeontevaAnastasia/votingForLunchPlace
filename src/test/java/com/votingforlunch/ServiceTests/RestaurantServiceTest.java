@@ -3,7 +3,9 @@ package com.votingforlunch.ServiceTests;
 import com.votingforlunch.model.Restaurant;
 import com.votingforlunch.service.RestaurantService;
 import com.votingforlunch.util.exception.NotFoundException;
+import com.votingforlunch.web.RestaurantRestController;
 import org.hibernate.LazyInitializationException;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -29,7 +31,7 @@ public class RestaurantServiceTest {
         RESTAURANT_MATCHER.assertMatch(actual, shabby);
     }
 
-    @Test(expected = LazyInitializationException.class)
+    @Test
     public void getAll() {
         List<Restaurant> all = restaurantService.getAll();
         RESTAURANT_MATCHER.assertMatch(all, restaurants);
@@ -54,10 +56,10 @@ public class RestaurantServiceTest {
     }
 
 
-    @Test
+    @Test(expected = LazyInitializationException.class)
     public void delete() {
         restaurantService.delete(REST_ID1);
-        Assertions.assertThrows(NotFoundException.class, () -> restaurantService.get(REST_ID1));
+       Assert.assertNull(restaurantService.get(REST_ID1));
     }
 
 }

@@ -14,11 +14,9 @@ import java.time.LocalDate;
 @Setter
 @AllArgsConstructor
 @ToString
-
 @Table(name = "votes", uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "created"}, name = "vote_unique_user_created_idx")})
 public class Vote extends AbstractBaseEntity{
-
-    @Column(name = "created", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
+    @Column(name = "created", nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_DATE")
     @NotNull
     private LocalDate date;
 

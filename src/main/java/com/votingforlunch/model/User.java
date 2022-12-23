@@ -1,10 +1,6 @@
 package com.votingforlunch.model;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
-import lombok.experimental.SuperBuilder;
-import org.springframework.data.jpa.domain.AbstractPersistable;
-
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -39,7 +35,7 @@ public class User extends AbstractBaseEntity{
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")
     private boolean enabled = true;
 
-    @Column(name = "registered", nullable = false, columnDefinition = "timestamp default now()", updatable = false)
+    @Column(name = "registered", nullable = false, columnDefinition="TIMESTAMP DEFAULT CURRENT_DATE", updatable = false)
     @NotNull
     private LocalDate registered;
 

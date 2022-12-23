@@ -12,8 +12,8 @@ public class VoteRestController {
     @Autowired
     VoteService voteService;
 
-    public Vote create (Vote vote, int userId){
-       return voteService.createOrUpdate(vote,userId);
+    public Vote create (VoteTo voteTo, int userId){
+       return voteService.createOrUpdate(voteTo,userId);
 
     }
 }

@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 
+@Transactional(readOnly = true)
 public interface DishRepository extends JpaRepository<Dish, Integer> {
 
     @Modifying
