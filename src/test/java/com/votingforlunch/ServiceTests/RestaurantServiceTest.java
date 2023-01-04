@@ -19,7 +19,7 @@ import static com.votingforlunch.RestaurantTestData.*;
 
 @SpringBootTest
 @RunWith(SpringRunner.class)
-public class RestaurantServiceTest {
+public class RestaurantServiceTest extends AbstractServiceTest{
 
     @Autowired
     RestaurantService restaurantService;

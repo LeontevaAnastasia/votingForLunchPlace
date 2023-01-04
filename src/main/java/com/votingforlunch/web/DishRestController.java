@@ -4,7 +4,6 @@ import com.votingforlunch.model.Dish;
 import com.votingforlunch.service.DishService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -34,8 +33,5 @@ public class DishRestController {
         log.info("getAll dishes");
         return dishService.getAll(restId);
     }
-
-
-
 
 }
