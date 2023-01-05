@@ -57,5 +57,12 @@ public class AdminRestController {
         return userService.findByEmailIgnoringCase(email);
     }
 
+    @PatchMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void isEnable(@PathVariable int id, @RequestParam boolean enabled) {
+        log.info(enabled ? "enable {}" : "disable {}", id);
+        userService.isEnable(id, enabled);
+    }
+
 }
 
