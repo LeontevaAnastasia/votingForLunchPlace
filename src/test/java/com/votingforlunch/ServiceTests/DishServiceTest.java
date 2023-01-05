@@ -33,7 +33,7 @@ public class DishServiceTest extends AbstractServiceTest {
 
     @Test(expected = LazyInitializationException.class)
     public void getAll() {
-        List<Dish> all = dishService.getAll(RestaurantTestData.shabby.getId());
+        List<Dish> all = dishService.getAllForRestaurant(RestaurantTestData.shabby.getId());
         DISH_MATCHER.assertMatch(all, dish1, dish2);
     }
 
@@ -52,7 +52,7 @@ public class DishServiceTest extends AbstractServiceTest {
     @Test(expected = LazyInitializationException.class)
     public void update() {
         Dish updated = getUpdatedDish();
-        dishService.update(updated);
+        dishService.update(updated, tokyoCity.getId());
         DISH_MATCHER.assertMatch((dishService.getById(DISH_ID1,REST_ID2)), updated);
     }
 

@@ -7,24 +7,26 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import javax.validation.Valid;
 import java.net.URI;
 
 import static com.votingforlunch.util.ValidationUtil.assureIdConsistent;
 import static com.votingforlunch.web.SecurityUtil.authUserId;
-import static org.slf4j.LoggerFactory.getLogger;
 
 @RestController
 @RequestMapping(value="/rest/profile", produces = MediaType.APPLICATION_JSON_VALUE)
 public class ProfileRestController{
 
-    UserService userService;
+    private final UserService userService;
 
+    public ProfileRestController(UserService userService) {
+        this.userService = userService;
+    }
     protected final Logger log = LoggerFactory.getLogger(getClass());
+
+
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)

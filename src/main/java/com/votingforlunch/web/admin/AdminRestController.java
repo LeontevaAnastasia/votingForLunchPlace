@@ -18,8 +18,11 @@ public class AdminRestController {
 
     protected final Logger log = LoggerFactory.getLogger(getClass());
 
-    UserService userService;
+    private final UserService userService;
 
+    public AdminRestController(UserService userService) {
+        this.userService = userService;
+    }
 
     @GetMapping
     public List<User> getAll() {

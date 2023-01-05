@@ -2,12 +2,9 @@ package com.votingforlunch.ServiceTests;
 
 import com.votingforlunch.model.Restaurant;
 import com.votingforlunch.service.RestaurantService;
-import com.votingforlunch.util.exception.NotFoundException;
-import com.votingforlunch.web.RestaurantRestController;
 import org.hibernate.LazyInitializationException;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

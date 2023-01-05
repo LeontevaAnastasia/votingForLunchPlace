@@ -35,12 +35,12 @@ public class DishService {
         return checkNotFoundWithId(dishRepository.findById(id,restId), id);
     }
 
-    public List<Dish> getAll(int restId) {
+    public List<Dish> getAllForRestaurant(int restId) {
         return dishRepository.getAllForRestaurant(restId);
     }
 
-    public void update(Dish dish) {
-        checkNotFoundWithId(dishRepository.save(dish), dish.getId());
+    public void update(Dish dish, int restId) {
+        ValidationUtil.checkNotFoundWithId(save(dish, restId), dish.getId());
     }
 
     public Dish save(Dish dish, int restId){
