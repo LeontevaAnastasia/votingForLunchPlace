@@ -2,6 +2,7 @@ package com.votingforlunch.web.admin;
 
 import com.votingforlunch.model.Restaurant;
 import com.votingforlunch.service.RestaurantService;
+import com.votingforlunch.to.RestaurantTo;
 import com.votingforlunch.util.ValidationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -65,6 +66,11 @@ public class RestaurantRestController{
         ValidationUtil.assureIdConsistent(restaurant, id);
         log.info("update restaurant {}", restaurant);
         restaurantService.update(restaurant);
+    }
+
+    @GetMapping(value = "/votes")
+    public List<RestaurantTo> getWithVotes() {
+        return restaurantService.getAllWithVotes();
     }
 }
 

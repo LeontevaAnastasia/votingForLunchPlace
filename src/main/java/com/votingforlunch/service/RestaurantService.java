@@ -2,6 +2,7 @@ package com.votingforlunch.service;
 
 import com.votingforlunch.model.Restaurant;
 import com.votingforlunch.repository.RestaurantRepository;
+import com.votingforlunch.to.RestaurantTo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -36,5 +37,9 @@ public class RestaurantService {
     public void update(Restaurant restaurant) {
         Assert.notNull(restaurant, "Restaurant must not be null.");
         checkNotFoundWithId(restaurantRepository.save(restaurant), restaurant.getId());
+    }
+
+    public List<RestaurantTo> getAllWithVotes() {
+        return restaurantRepository.getAllWithVotes();
     }
 }

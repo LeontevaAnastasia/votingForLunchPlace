@@ -13,7 +13,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import java.net.URI;
 
 import static com.votingforlunch.util.ValidationUtil.assureIdConsistent;
-import static com.votingforlunch.web.SecurityUtil.authUserId;
+import static com.votingforlunch.util.SecurityUtil.authUserId;
 
 @RestController
 @RequestMapping(value="/rest/profile", produces = MediaType.APPLICATION_JSON_VALUE)

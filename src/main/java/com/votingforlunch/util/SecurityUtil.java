@@ -1,4 +1,4 @@
-package com.votingforlunch.web;
+package com.votingforlunch.util;
 
 public class SecurityUtil {
     public static int authUserId() {
