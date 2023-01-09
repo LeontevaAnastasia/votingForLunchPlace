@@ -47,7 +47,7 @@ public class DishService {
         if (!dish.isNew() && getById(dish.getId(), restId) == null) {
             return null;
         }
-        dish.setRestaurant(restaurantRepository.getReferenceById(restId));
+        dish.setRestaurant(restaurantRepository.getById(restId));
         return dishRepository.save(dish);
     }
 

@@ -26,7 +26,7 @@ public class UserService {
 
 
     public User get(int id) {
-        return checkNotFoundWithId(userRepository.getReferenceById(id), id);
+        return checkNotFoundWithId(userRepository.getById(id), id);
     }
 
     public User findByEmailIgnoringCase(String email){
@@ -51,7 +51,7 @@ public class UserService {
 
     @Transactional
     public void isEnable(int id, boolean enabled) {
-        User user = userRepository.getById(id).orElse(null);
+        User user = userRepository.getUserById(id).orElse(null);
         if (user == null) {
             throw new NotFoundException("User with id " + id + " doesn't exists.");
         }

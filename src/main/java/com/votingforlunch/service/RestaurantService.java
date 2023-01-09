@@ -27,7 +27,7 @@ public class RestaurantService {
     }
 
     public Restaurant get(int id) {
-        return checkNotFoundWithId(restaurantRepository.getReferenceById(id), id);
+        return checkNotFoundWithId(restaurantRepository.getById(id), id);
     }
 
     public List<Restaurant> getAll() {

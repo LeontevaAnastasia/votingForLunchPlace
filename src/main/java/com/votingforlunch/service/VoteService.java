@@ -30,7 +30,7 @@ public class VoteService {
     private static final LocalTime votingDeadline = LocalTime.of(11, 0);
 
     public Vote createOrUpdate(VoteTo voteTo, int userId) {
-        ValidationUtil.checkNotFoundWithId(restaurantRepository.getReferenceById(voteTo.getRestaurantId()),
+        ValidationUtil.checkNotFoundWithId(restaurantRepository.getById(voteTo.getRestaurantId()),
                 voteTo.getRestaurantId());
         Assert.notNull(voteTo, "VoteTo must not be null.");
         Vote vote = createNewFromTo(voteTo, userId);
@@ -68,7 +68,7 @@ public class VoteService {
     }
 
     public Vote createOrUpdateForTest(VoteTo voteTo, int userId, LocalTime requestTime) {
-        ValidationUtil.checkNotFoundWithId(restaurantRepository.getReferenceById(voteTo.getRestaurantId()),
+        ValidationUtil.checkNotFoundWithId(restaurantRepository.getById(voteTo.getRestaurantId()),
                 voteTo.getRestaurantId());
         Assert.notNull(voteTo, "VoteTo must not be null.");
         Vote vote = createNewFromTo(voteTo, userId);
