@@ -17,7 +17,7 @@ public class UserTestData {
     public static final int ADMIN_ID = 3;
     public static final int NOT_FOUND = 10;
 
-    public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator("registered", "password");
+    public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(User.class, "registered");
 
 
     public static final User userOne = new User(USER_ID1, "User1", "user1@gmail.com", "password", LocalDate.now(), true, Set.of(Role.ROLE_USER));

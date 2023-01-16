@@ -12,7 +12,7 @@ public class DishesTestData {
     public static final int DISH_ID = 3;
     public static final int DISH_NOT_FOUND = 10;
 
-    public static final MatcherFactory.Matcher<Dish> DISH_MATCHER = MatcherFactory.usingIgnoringFieldsComparator();
+    public static final MatcherFactory.Matcher<Dish> DISH_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(Dish.class);
 
 
     public static final Dish dish1 = new Dish(1,"Том-Ям", LocalDate.now(), 450.00, RestaurantTestData.shabby );
