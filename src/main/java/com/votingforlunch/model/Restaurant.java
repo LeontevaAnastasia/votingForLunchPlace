@@ -1,5 +1,6 @@
 package com.votingforlunch.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
 
@@ -26,6 +27,7 @@ public class Restaurant  extends AbstractBaseEntity {
     @NotBlank
     private String address;
 
+    @JsonIgnore
     @Enumerated(EnumType.STRING)
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
     private Set<Dish> dishes;

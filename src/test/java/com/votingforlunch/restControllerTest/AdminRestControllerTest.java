@@ -1,24 +1,15 @@
 package com.votingforlunch.restControllerTest;
 
-import com.votingforlunch.UserTestData;
 import com.votingforlunch.model.User;
 import com.votingforlunch.service.UserService;
 import com.votingforlunch.util.exception.NotFoundException;
-import com.votingforlunch.web.json.JsonUtil;
-import lombok.AllArgsConstructor;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
-import org.springframework.test.context.junit.jupiter.SpringExtension;
-import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import static com.votingforlunch.UserTestData.*;
 import static com.votingforlunch.web.json.JsonUtil.writeValue;
-import static org.hibernate.cfg.AvailableSettings.URL;
-import static org.hibernate.cfg.AvailableSettings.USER;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;

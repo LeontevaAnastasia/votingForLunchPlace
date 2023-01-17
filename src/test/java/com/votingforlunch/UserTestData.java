@@ -4,7 +4,6 @@ import com.votingforlunch.model.Role;
 import com.votingforlunch.model.User;
 
 import java.time.LocalDate;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Set;
 
