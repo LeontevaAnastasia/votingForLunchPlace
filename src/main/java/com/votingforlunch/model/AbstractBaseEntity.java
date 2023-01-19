@@ -1,6 +1,7 @@
 package com.votingforlunch.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.votingforlunch.HasId;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.springframework.data.domain.Persistable;
@@ -13,7 +14,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @Access(AccessType.FIELD)
-public abstract class AbstractBaseEntity implements Persistable<Integer> {
+public abstract class AbstractBaseEntity implements HasId {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,6 +32,16 @@ public abstract class AbstractBaseEntity implements Persistable<Integer> {
     }
     public AbstractBaseEntity(){
 
+    }
+
+    @Override
+    public void setId(Integer id) {
+        this.id = id;
+    }
+
+    @Override
+    public Integer getId() {
+        return id;
     }
 
     @Override

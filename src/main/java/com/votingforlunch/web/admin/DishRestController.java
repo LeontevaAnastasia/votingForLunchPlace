@@ -30,7 +30,7 @@ public class DishRestController {
 
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Dish> create(@RequestBody Dish dish, @PathVariable int restaurantId) {
+    public ResponseEntity<Dish> create(@Valid @RequestBody Dish dish, @PathVariable int restaurantId) {
         ValidationUtil.checkNew(dish);
         log.info("Create new dish {}", dish);
         Dish created = dishService.create(dish, restaurantId);
