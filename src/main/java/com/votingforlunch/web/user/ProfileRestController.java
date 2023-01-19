@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -43,7 +44,7 @@ public class ProfileRestController{
 
 
     @GetMapping()
-    public User get(User user) {
+    public User get(@AuthenticationPrincipal User user) {
         log.info("Get userTo by id {}.", user.getId());
         return userService.get(user.getId());
     }
@@ -51,7 +52,7 @@ public class ProfileRestController{
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(User user) {
+    public void delete(@AuthenticationPrincipal User user) {
         log.info("Delete profile id {} by user.", user.getId());
         userService.delete(user.getId());
     }
