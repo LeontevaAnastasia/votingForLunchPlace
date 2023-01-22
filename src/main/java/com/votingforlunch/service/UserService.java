@@ -2,10 +2,13 @@ package com.votingforlunch.service;
 
 import com.votingforlunch.model.User;
 import com.votingforlunch.repository.UserRepository;
+import com.votingforlunch.to.UserTo;
 import com.votingforlunch.util.UserUtil;
 import com.votingforlunch.util.ValidationUtil;
 import com.votingforlunch.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Scope;
+import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
@@ -13,9 +16,11 @@ import org.springframework.util.Assert;
 import java.util.List;
 import java.util.Optional;
 
+import static com.votingforlunch.util.UserUtil.prepareToSave;
 import static com.votingforlunch.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
+@Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserService {
 
     @Autowired
@@ -23,7 +28,7 @@ public class UserService {
 
     public User create(User user) {
         Assert.notNull(user, "user must not be null");
-        return userRepository.save(UserUtil.prepareToSave(user));
+        return userRepository.save(prepareToSave(user));
     }
 
 
@@ -46,9 +51,15 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public void update(UserTo userTo) {
+        Assert.notNull(userTo, "user must not be null");
+        User user = get(userTo.getId());
+        prepareToSave(UserUtil.updateFromTo(user, userTo));
+    }
+
     public void update(User user) {
         Assert.notNull(user, "user must not be null");
-        checkNotFoundWithId(userRepository.save(user), user.getId());
+        prepareToSave(user);
     }
 
     @Transactional

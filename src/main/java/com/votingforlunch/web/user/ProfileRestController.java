@@ -3,6 +3,8 @@ package com.votingforlunch.web.user;
 import com.votingforlunch.AuthUser;
 import com.votingforlunch.model.User;
 import com.votingforlunch.service.UserService;
+import com.votingforlunch.to.UserTo;
+import com.votingforlunch.util.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -16,7 +18,6 @@ import javax.validation.Valid;
 import java.net.URI;
 
 import static com.votingforlunch.util.ValidationUtil.assureIdConsistent;
-import static com.votingforlunch.util.SecurityUtil.authUserId;
 
 @RestController
 @RequestMapping(value="/rest/profile", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -33,9 +34,9 @@ public class ProfileRestController{
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<User> register(@Valid @RequestBody User user) {
-        log.info("Create new user from to {}", user);
-        User created = userService.create(user);
+    public ResponseEntity<User> register(@Valid @RequestBody UserTo userTo) {
+        log.info("Create new user from to {}", userTo);
+        User created = userService.create(UserUtil.createNewFromTo(userTo));
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/rest/profile/{id}")
                 .buildAndExpand(created.getId())
@@ -45,9 +46,9 @@ public class ProfileRestController{
 
 
     @GetMapping()
-    public User get(@AuthenticationPrincipal AuthUser authUser) {
+    public UserTo get(@AuthenticationPrincipal AuthUser authUser) {
         log.info("Get userTo by id {}.", authUser.getId());
-        return userService.get(authUser.getId());
+        return UserUtil.asTo(userService.get(authUser.getId()));
     }
 
 
@@ -60,14 +61,14 @@ public class ProfileRestController{
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@Valid @RequestBody User user, @AuthenticationPrincipal AuthUser authUser) {
-        log.info("Update user to {} by user id {}.", user, authUser.getId());
-        User oldUser = authUser.getUser();
-        assureIdConsistent(user, oldUser.id());
-        user.setRoles(oldUser.getRoles());
-        if (user.getPassword() == null) {
-            user.setPassword(oldUser.getPassword());
+    public void update(@Valid @RequestBody UserTo userTo, @AuthenticationPrincipal AuthUser authUser) {
+        log.info("Update user to {} by user id {}.", userTo, authUser.getId());
+        UserTo oldUser = authUser.getUserTo();
+        assureIdConsistent(userTo, oldUser.id());
+      //  userTo.setRoles(oldUser.getRoles());
+        if (userTo.getPassword() == null) {
+            userTo.setPassword(oldUser.getPassword());
         }
-        userService.update(user);
+        userService.update(userTo);
     }
 }

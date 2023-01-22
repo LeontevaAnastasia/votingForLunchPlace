@@ -2,6 +2,7 @@ package com.votingforlunch;
 
 import com.votingforlunch.model.Role;
 import com.votingforlunch.model.User;
+import com.votingforlunch.to.UserTo;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -23,6 +24,7 @@ public class UserTestData {
     public static final User userTwo = new User(USER_ID2, "User2", "user2@gmail.com", "password", LocalDate.now(), true, Set.of(Role.USER));
     public static final User admin = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", LocalDate.now(), true, Set.of(Role.ADMIN));
 
+    public static final User userOneUpdFromTo = new User(USER_ID1, "upd", "upd@gmail.com", "password", LocalDate.now(), true, Set.of(Role.USER));
 
 
     public static User getNew() {
@@ -38,5 +40,9 @@ public class UserTestData {
         updated.setEnabled(false);
         updated.setRoles(Set.of(Role.ADMIN));
         return updated;
+    }
+
+    public static UserTo getUpdatedTo() {
+        return new UserTo(USER_ID1, "upd", "upd@gmail.com", "password");
     }
 }

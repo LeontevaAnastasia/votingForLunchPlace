@@ -3,6 +3,7 @@ package com.votingforlunch.ServiceTests;
 import com.votingforlunch.UserTestData;
 import com.votingforlunch.model.Role;
 import com.votingforlunch.service.UserService;
+import com.votingforlunch.to.UserTo;
 import org.hibernate.LazyInitializationException;
 import org.junit.Assert;
 import org.junit.Test;
@@ -80,6 +81,11 @@ public class UserServiceTest extends AbstractServiceTest {
         USER_MATCHER.assertMatch(userService.get(USER_ID1), getUpdated());
     }
 
-
+    @Test(expected = LazyInitializationException.class)
+   public void updateUserTo() {
+        UserTo updated = UserTestData.getUpdatedTo();
+        userService.update(updated);
+        UserTestData.USER_MATCHER.assertMatch(userService.get(UserTestData.USER_ID1), UserTestData.userOneUpdFromTo);
+    }
 
 }

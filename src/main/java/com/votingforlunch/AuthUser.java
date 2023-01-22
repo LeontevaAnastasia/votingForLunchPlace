@@ -1,26 +1,36 @@
 package com.votingforlunch;
 
 import com.votingforlunch.model.User;
+import com.votingforlunch.to.UserTo;
+import com.votingforlunch.util.UserUtil;
 import lombok.Getter;
 import lombok.ToString;
-import org.springframework.lang.NonNull;
+
+import java.io.Serial;
 
 @Getter
-@ToString(of = "user")
+@ToString
 public class AuthUser extends org.springframework.security.core.userdetails.User {
 
-    private final User user;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
-    public AuthUser(@NonNull User user) {
-        super(user.getEmail(), user.getPassword(), user.getRoles());
-        this.user = user;
-    }
+    private UserTo userTo;
 
-    public int id() {
-        return user.id();
+    public AuthUser(User user) {
+        super(user.getEmail(), user.getPassword(), user.isEnabled(), true, true, true, user.getRoles());
+        this.userTo = UserUtil.asTo(user);
     }
 
     public int getId() {
-        return user.getId();
+        return userTo.id();
+    }
+
+    public void update(UserTo newTo) {
+        userTo = newTo;
+    }
+
+    public UserTo getUserTo() {
+        return userTo;
     }
 }
