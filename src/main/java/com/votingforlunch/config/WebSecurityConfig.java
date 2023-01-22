@@ -4,10 +4,13 @@ import com.votingforlunch.AuthUser;
 import com.votingforlunch.model.User;
 import com.votingforlunch.repository.UserRepository;
 import lombok.AllArgsConstructor;
+import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -27,8 +30,12 @@ import static com.votingforlunch.model.Role.USER;
 @EnableWebSecurity
 @Slf4j
 @AllArgsConstructor
+@Setter
 public class WebSecurityConfig {
     private final UserRepository userRepository;
+
+    public static final PasswordEncoder PASSWORD_ENCODER = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -48,7 +55,7 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-         .antMatchers(HttpMethod.POST, "/rest/profile").anonymous()
+         .antMatchers(HttpMethod.POST, "/rest/profile/register").anonymous()
                 .antMatchers("/rest/profile").hasRole(USER.name())
                 .antMatchers("/rest/**").hasRole(ADMIN.name())
                 .and().httpBasic()

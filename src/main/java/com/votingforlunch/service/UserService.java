@@ -2,6 +2,7 @@ package com.votingforlunch.service;
 
 import com.votingforlunch.model.User;
 import com.votingforlunch.repository.UserRepository;
+import com.votingforlunch.util.UserUtil;
 import com.votingforlunch.util.ValidationUtil;
 import com.votingforlunch.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class UserService {
 
     public User create(User user) {
         Assert.notNull(user, "user must not be null");
-        return userRepository.save(user);
+        return userRepository.save(UserUtil.prepareToSave(user));
     }
 
 

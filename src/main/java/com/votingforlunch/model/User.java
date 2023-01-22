@@ -1,5 +1,6 @@
 package com.votingforlunch.model;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -30,6 +31,7 @@ public class User extends AbstractBaseEntity{
 
     @Column(name = "password")
     @Size(min = 4, max = 50)
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Column(name = "enabled", nullable = false, columnDefinition = "bool default true")

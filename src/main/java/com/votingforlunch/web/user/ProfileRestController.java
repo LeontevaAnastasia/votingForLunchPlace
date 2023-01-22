@@ -62,7 +62,12 @@ public class ProfileRestController{
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@Valid @RequestBody User user, @AuthenticationPrincipal AuthUser authUser) {
         log.info("Update user to {} by user id {}.", user, authUser.getId());
-        assureIdConsistent(user, authUser.getId());
+        User oldUser = authUser.getUser();
+        assureIdConsistent(user, oldUser.id());
+        user.setRoles(oldUser.getRoles());
+        if (user.getPassword() == null) {
+            user.setPassword(oldUser.getPassword());
+        }
         userService.update(user);
     }
 }
