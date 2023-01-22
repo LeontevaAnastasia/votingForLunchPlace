@@ -1,12 +1,12 @@
 INSERT INTO USERS (NAME, EMAIL, PASSWORD)
-VALUES ('User1', 'user1@gmail.com', 'password'),
-       ('User2', 'user2@gmail.com', 'password'),
-       ('Admin', 'admin@gmail.com', 'admin');
+VALUES ('User1', 'user1@gmail.com', '{noop}password'),
+       ('User2', 'user2@gmail.com', '{noop}password'),
+       ('Admin', 'admin@gmail.com', '{noop}admin');
 
 INSERT INTO USER_ROLE (ROLE, USER_ID)
-VALUES ('ROLE_USER', 1),
-       ('ROLE_USER', 2),
-       ('ROLE_ADMIN', 3);
+VALUES ('USER', 1),
+       ('USER', 2),
+       ('ADMIN', 3);
 
 INSERT INTO RESTAURANTS (RESTAURANT_NAME, ADDRESS)
 VALUES ('Shabby', 'Гороховая 11'),

@@ -19,14 +19,14 @@ public class UserTestData {
     public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(User.class, "registered");
 
 
-    public static final User userOne = new User(USER_ID1, "User1", "user1@gmail.com", "password", LocalDate.now(), true, Set.of(Role.ROLE_USER));
-    public static final User userTwo = new User(USER_ID2, "User2", "user2@gmail.com", "password", LocalDate.now(), true, Set.of(Role.ROLE_USER));
-    public static final User admin = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", LocalDate.now(), true, Set.of(Role.ROLE_ADMIN));
+    public static final User userOne = new User(USER_ID1, "User1", "user1@gmail.com", "password", LocalDate.now(), true, Set.of(Role.USER));
+    public static final User userTwo = new User(USER_ID2, "User2", "user2@gmail.com", "password", LocalDate.now(), true, Set.of(Role.USER));
+    public static final User admin = new User(ADMIN_ID, "Admin", "admin@gmail.com", "admin", LocalDate.now(), true, Set.of(Role.ADMIN));
 
 
 
     public static User getNew() {
-        return new User(null, "New", "new@gmail.com", "newPass", LocalDate.now(), false, Collections.singleton(Role.ROLE_USER));
+        return new User(null, "New", "new@gmail.com", "newPass", LocalDate.now(), false, Collections.singleton(Role.USER));
     }
 
 
@@ -36,7 +36,7 @@ public class UserTestData {
         updated.setName("UpdatedName");
         updated.setPassword("updatedPass");
         updated.setEnabled(false);
-        updated.setRoles(Set.of(Role.ROLE_ADMIN));
+        updated.setRoles(Set.of(Role.ADMIN));
         return updated;
     }
 }

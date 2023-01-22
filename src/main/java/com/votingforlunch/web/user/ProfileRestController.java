@@ -1,5 +1,6 @@
 package com.votingforlunch.web.user;
 
+import com.votingforlunch.AuthUser;
 import com.votingforlunch.model.User;
 import com.votingforlunch.service.UserService;
 import org.slf4j.Logger;
@@ -44,9 +45,9 @@ public class ProfileRestController{
 
 
     @GetMapping()
-    public User get(@AuthenticationPrincipal User user) {
-        log.info("Get userTo by id {}.", user.getId());
-        return userService.get(user.getId());
+    public User get(@AuthenticationPrincipal AuthUser authUser) {
+        log.info("Get userTo by id {}.", authUser.getId());
+        return userService.get(authUser.getId());
     }
 
 
@@ -59,9 +60,9 @@ public class ProfileRestController{
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void update(@Valid @RequestBody User user) {
-        log.info("Update user to {} by user id {}.", user, user.getId());
-        assureIdConsistent(user, authUserId());
+    public void update(@Valid @RequestBody User user, @AuthenticationPrincipal AuthUser authUser) {
+        log.info("Update user to {} by user id {}.", user, authUser.getId());
+        assureIdConsistent(user, authUser.getId());
         userService.update(user);
     }
 }

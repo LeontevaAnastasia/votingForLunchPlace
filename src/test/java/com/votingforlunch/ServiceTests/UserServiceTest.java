@@ -6,7 +6,6 @@ import com.votingforlunch.service.UserService;
 import org.hibernate.LazyInitializationException;
 import org.junit.Assert;
 import org.junit.Test;
-import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -64,14 +63,14 @@ public class UserServiceTest extends AbstractServiceTest {
 
     @Test
     public void getByEmail() {
-        User user = userService.findByEmailIgnoringCase("admin@gmail.com");
+        User user = userService.findByEmailIgnoringCase("admin@gmail.com").orElse(null);
         USER_MATCHER.assertMatch(user, admin);
     }
 
     @Test
     public void duplicateMailCreate() {
         assertThrows(DataAccessException.class, () ->
-                userService.create(new User(null, "Duplicate", "user1@gmail.com", "newPass", Role.ROLE_USER)));
+                userService.create(new User(null, "Duplicate", "user1@gmail.com", "newPass", Role.USER)));
     }
 
     @Test(expected = LazyInitializationException.class)

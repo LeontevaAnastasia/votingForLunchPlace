@@ -10,6 +10,7 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.Assert;
 
 import java.util.List;
+import java.util.Optional;
 
 import static com.votingforlunch.util.ValidationUtil.checkNotFoundWithId;
 
@@ -29,7 +30,7 @@ public class UserService {
         return checkNotFoundWithId(userRepository.getById(id), id);
     }
 
-    public User findByEmailIgnoringCase(String email){
+    public Optional<User> findByEmailIgnoringCase(String email){
         Assert.notNull(email, "email must not be null");
         return ValidationUtil.checkNotFound(userRepository.findByEmailIgnoreCase(email), "email=" + email);
 

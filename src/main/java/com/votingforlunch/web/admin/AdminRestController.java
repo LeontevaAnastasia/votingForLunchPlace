@@ -54,7 +54,7 @@ public class AdminRestController {
     @GetMapping("/by-email")
     public User findByEmailIgnoringCase(@RequestParam String email){
         log.info("getByEmail {}", email);
-        return userService.findByEmailIgnoringCase(email);
+        return userService.findByEmailIgnoringCase(email).orElse(null);
     }
 
     @PatchMapping("/{id}")

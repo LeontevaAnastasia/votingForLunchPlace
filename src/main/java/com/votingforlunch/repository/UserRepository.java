@@ -13,7 +13,7 @@ import java.util.Optional;
 public interface UserRepository extends JpaRepository<User, Integer> {
 
     @Query("SELECT u FROM User u WHERE u.email = LOWER(:email)")
-    User findByEmailIgnoreCase(String email);
+    Optional<User> findByEmailIgnoreCase(String email);
 
 
     @Modifying
