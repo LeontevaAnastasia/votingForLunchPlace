@@ -3,12 +3,14 @@ package com.votingforlunch.util;
 import com.votingforlunch.model.Role;
 import com.votingforlunch.model.User;
 import com.votingforlunch.to.UserTo;
+import lombok.experimental.UtilityClass;
 
 import java.time.LocalDate;
 import java.util.Set;
 
 import static com.votingforlunch.config.WebSecurityConfig.PASSWORD_ENCODER;
 
+@UtilityClass
 public class UserUtil {
 
     public static User updateFromTo(User user, UserTo userTo) {

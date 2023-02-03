@@ -5,7 +5,7 @@ spring:
     show-sql: true
     open-in-view: false
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     properties:
       #  http://docs.jboss.org/hibernate/orm/5.3/userguide/html_single/Hibernate_User_Guide.html#configurations
       hibernate:
@@ -31,7 +31,7 @@ spring:
 
   data.rest:
     #  https://docs.spring.io/spring-data/rest/docs/current/reference/html/#getting-started.basic-settings
-    basePath: /api
+    basePath: /rest
     returnBodyOnCreate: true
 
 #  https://docs.spring.io/spring-boot/docs/current/reference/html/appendix-application-properties.html#security-properties

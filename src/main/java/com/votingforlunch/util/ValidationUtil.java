@@ -4,8 +4,10 @@ import com.votingforlunch.HasId;
 import com.votingforlunch.model.AbstractBaseEntity;
 import com.votingforlunch.util.exception.IllegalRequestDataException;
 import com.votingforlunch.util.exception.NotFoundException;
+import lombok.experimental.UtilityClass;
 import org.springframework.dao.DataAccessException;
 
+@UtilityClass
 public class ValidationUtil {
 
     public static <T> T checkNotFoundWithId(T object, int id) {
