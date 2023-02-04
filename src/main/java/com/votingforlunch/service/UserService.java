@@ -7,6 +7,8 @@ import com.votingforlunch.util.UserUtil;
 import com.votingforlunch.util.ValidationUtil;
 import com.votingforlunch.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
@@ -27,6 +29,7 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
+    @CachePut(value = "users", key = "#user.email")
     public User create(User user) {
         Assert.notNull(user, "user must not be null");
         return userRepository.save(prepareToSave(user));
@@ -44,6 +47,7 @@ public class UserService {
 
     }
 
+    @CacheEvict(value = "users", allEntries = true)
     public void delete(int id) {
 
         checkNotFoundWithId(userRepository.delete(id),id);
