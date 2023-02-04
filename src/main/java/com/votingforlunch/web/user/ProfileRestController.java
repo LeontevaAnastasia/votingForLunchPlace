@@ -7,6 +7,7 @@ import com.votingforlunch.to.UserTo;
 import com.votingforlunch.util.UserUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -54,9 +55,10 @@ public class ProfileRestController{
 
     @DeleteMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@AuthenticationPrincipal User user) {
-        log.info("Delete profile id {} by user.", user.getId());
-        userService.delete(user.getId());
+    @CacheEvict(value = "users", key = "#authUser.username")
+    public void delete(@AuthenticationPrincipal AuthUser authUser) {
+        log.info("Delete profile id {} by user.", authUser.getId());
+        userService.delete(authUser.getId());
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)

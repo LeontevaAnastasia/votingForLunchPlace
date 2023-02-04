@@ -7,6 +7,7 @@ import com.votingforlunch.util.UserUtil;
 import com.votingforlunch.util.ValidationUtil;
 import com.votingforlunch.util.exception.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
 import org.springframework.stereotype.Service;
@@ -36,6 +37,7 @@ public class UserService {
         return checkNotFoundWithId(userRepository.getById(id), id);
     }
 
+    @Cacheable("users")
     public Optional<User> findByEmailIgnoringCase(String email){
         Assert.notNull(email, "email must not be null");
         return ValidationUtil.checkNotFound(userRepository.findByEmailIgnoreCase(email), "email=" + email);
