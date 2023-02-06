@@ -1,6 +1,7 @@
 package com.votingforlunch.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.votingforlunch.util.NoHtml;
 import lombok.*;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
@@ -16,17 +17,18 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
-@ToString(callSuper = true, exclude = {"password"})
 public class User extends AbstractBaseEntity{
 
     @Column(name = "name")
     @Size(max = 128)
+    @NoHtml
     private String name;
 
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotEmpty
     @Size(max = 128)
+    @NoHtml
     private String email;
 
     @Column(name = "password")
@@ -57,7 +59,8 @@ public class User extends AbstractBaseEntity{
     }
 
     public User(Integer id, String name, String email, String password, Role role, Role... roles) {
-      this(id, name, email, password, LocalDate.now(),true, EnumSet.of(role, roles));
+      this(name, email, password, LocalDate.now(),true, EnumSet.of(role, roles));
+        this.id = id;
      }
     public User(Integer id, String name, String email, String password, LocalDate registered, boolean enabled, Set<Role> roles) {
         super(id);
@@ -75,6 +78,11 @@ public class User extends AbstractBaseEntity{
         this.registered = date;
         this.enabled=enabled;
         this.roles = roles;
+    }
+
+    @Override
+    public String toString() {
+        return "User:" + id + '[' + email + ']';
     }
 }
 
