@@ -38,7 +38,7 @@ public class UserServiceTest extends AbstractServiceTest {
         USER_MATCHER.assertMatch(userService.get(newId), newUser);
     }
 
-      @Test
+      @Test (expected = LazyInitializationException.class)
     public void delete() {
         userService.delete(UserTestData.USER_ID1);
           Assert.assertNull(userService.get(UserTestData.USER_ID1));

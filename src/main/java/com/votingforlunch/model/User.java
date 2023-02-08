@@ -3,6 +3,9 @@ package com.votingforlunch.model;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.votingforlunch.util.NoHtml;
 import lombok.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
@@ -32,7 +35,7 @@ public class User extends AbstractBaseEntity{
     private String email;
 
     @Column(name = "password")
-    @Size(min = 4, max = 50)
+    @Size(min = 4, max = 100)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
@@ -48,6 +51,8 @@ public class User extends AbstractBaseEntity{
             uniqueConstraints = {@UniqueConstraint(columnNames = {"user_id", "role"}, name = "user_roles_unique")})
     @Column(name = "role")
     @ElementCollection(fetch = FetchType.EAGER)
+    @JoinColumn(name = "id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Set<Role> roles;
 
     public User(){

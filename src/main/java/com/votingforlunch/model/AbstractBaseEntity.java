@@ -1,11 +1,9 @@
 package com.votingforlunch.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.votingforlunch.HasId;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 import org.hibernate.Hibernate;
-import org.springframework.data.domain.Persistable;
 import org.springframework.util.Assert;
 
 import javax.persistence.*;
@@ -27,11 +25,12 @@ public abstract class AbstractBaseEntity implements HasId {
         return id;
     }
 
-    @JsonIgnore
+    @Schema(hidden = true)
     @Override
     public boolean isNew() {
         return this.id == null;
     }
+
     public AbstractBaseEntity(){
 
     }

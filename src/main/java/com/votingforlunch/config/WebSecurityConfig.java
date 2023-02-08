@@ -6,11 +6,9 @@ import com.votingforlunch.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -23,7 +21,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import java.util.Optional;
 
 import static com.votingforlunch.model.Role.ADMIN;
-import static com.votingforlunch.model.Role.USER;
 
 
 @Configuration
@@ -39,14 +36,14 @@ public class WebSecurityConfig {
 
     @Bean
     public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+        return PASSWORD_ENCODER;
     }
 
     @Bean
     public UserDetailsService userDetailsService() {
         return email -> {
             log.debug("Authenticating '{}'", email);
-            Optional<User> optionalUser = userRepository.findByEmailIgnoreCase(email.toLowerCase());
+            Optional<User> optionalUser = userRepository.findByEmailIgnoreCase(email);
             return new AuthUser(optionalUser.orElseThrow(
                     () -> new UsernameNotFoundException("User '" + email + "' was not found")));
         };
@@ -55,15 +52,12 @@ public class WebSecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-         .antMatchers(HttpMethod.POST, "/rest/profile/register").anonymous()
-                .antMatchers("/rest/profile").hasRole(USER.name())
+         .antMatchers(HttpMethod.POST, "/rest/profile").anonymous()
+                .antMatchers("/rest/profile").authenticated()
                 .antMatchers("/rest/**").hasRole(ADMIN.name())
                 .and().httpBasic()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable();
         return http.build();
     }
-
-
-
 }

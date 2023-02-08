@@ -10,11 +10,10 @@ import javax.validation.constraints.Size;
 import java.util.Set;
 
 @Entity
-@Table(name = "restaurants")
 @Getter
 @Setter
-
 @AllArgsConstructor
+@Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_name", "address"}, name = "restaurant_unique_name_address_idx")})
 public class Restaurant  extends AbstractBaseEntity {
 
     @Column(name = "restaurant_name")
