@@ -13,11 +13,12 @@ public class RestaurantTestData {
 
 
     public static final int REST_ID1 = 1;
-    public static final int REST_ID2 = 2;
+    //public static final int REST_ID2 = 2;
     public static final int NOT_FOUND = 100;
 
     public static final MatcherFactory.Matcher<Restaurant> RESTAURANT_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(Restaurant.class,"dishes");
     public static final MatcherFactory.Matcher<RestaurantTo> RESTAURANT_TO_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(RestaurantTo.class,"dishes");
+
     public static final Restaurant shabby = new Restaurant(1, "Shabby", "Гороховая 11");
     public static final Restaurant tokyoCity = new Restaurant(2, "Tokyo City", "Невский пр. 71");
     public static final Restaurant phali = new Restaurant(3, "Пхали-Хинкали","Большая-Морская 27");

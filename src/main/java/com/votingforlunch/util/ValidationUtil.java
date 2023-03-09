@@ -1,11 +1,12 @@
 package com.votingforlunch.util;
 
 import com.votingforlunch.HasId;
-import com.votingforlunch.model.AbstractBaseEntity;
 import com.votingforlunch.util.exception.IllegalRequestDataException;
 import com.votingforlunch.util.exception.NotFoundException;
 import lombok.experimental.UtilityClass;
 import org.springframework.dao.DataAccessException;
+
+import java.util.Optional;
 
 @UtilityClass
 public class ValidationUtil {
@@ -28,6 +29,14 @@ public class ValidationUtil {
         if (!found) {
             throw new NotFoundException("Not found entity with " + msg);
         }
+    }
+
+    public static <T> T checkNotFoundWithId(Optional<T> optional, int id) {
+        return checkNotFoundWithId(optional, "Not found entity with id=" + id);
+    }
+
+    public static <T> T checkNotFoundWithId(Optional<T> optional, String msg) {
+        return optional.orElseThrow(() -> new NotFoundException(msg));
     }
 
     public static void checkNew(HasId bean) {
@@ -53,17 +62,6 @@ public class ValidationUtil {
                 }
             };
         }
-    }
-
-    //  http://stackoverflow.com/a/28565320/548473
-    public static Throwable getRootCause(Throwable t) {
-        Throwable result = t;
-        Throwable cause;
-
-        while (null != (cause = result.getCause()) && (result != cause)) {
-            result = cause;
-        }
-        return result;
     }
 
 }

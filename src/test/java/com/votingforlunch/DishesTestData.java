@@ -3,16 +3,17 @@ package com.votingforlunch;
 import com.votingforlunch.model.Dish;
 
 import java.time.LocalDate;
+import java.util.List;
 
 
 public class DishesTestData {
 
     public static final int DISH_ID1 = 1;
     public static final int DISH_ID2 = 2;
-    public static final int DISH_ID = 3;
+    public static final int DISH_ID3 = 3;
     public static final int DISH_NOT_FOUND = 10;
 
-    public static final MatcherFactory.Matcher<Dish> DISH_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(Dish.class);
+    public static final MatcherFactory.Matcher<Dish> DISH_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(Dish.class,"restaurant");
 
 
     public static final Dish dish1 = new Dish(1,"Том-Ям", LocalDate.now(), 450.00, RestaurantTestData.shabby );
@@ -26,17 +27,20 @@ public class DishesTestData {
     public static Dish getNewDish(){
         return new Dish(null,"NewDish",LocalDate.now(),123.00, null);
     }
+
     public static Dish getUpdatedDish() {
         Dish updated = new Dish(dish1);
         updated.setDishName("UpdatedName");
         updated.setPrice(500.00);
-        updated.setRestaurant(RestaurantTestData.tokyoCity);
         return updated;
     }
 
     public static Dish getDuplicated() {
         return new Dish(null, dish1.getDishName(), LocalDate.now(),450.00, RestaurantTestData.shabby);
     }
+
+    public static final List<Dish> shabbyDishes = List.of(dish2, dish1);
+
 
 
 

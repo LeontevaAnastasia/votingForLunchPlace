@@ -9,6 +9,7 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Optional;
 
 @Transactional(readOnly = true)
 public interface RestaurantRepository extends JpaRepository<Restaurant, Integer> {
@@ -21,4 +22,7 @@ public interface RestaurantRepository extends JpaRepository<Restaurant, Integer>
     @Query("select new com.votingforlunch.to.RestaurantTo(v.restaurantId, count (v.restaurantId))" +
             "from Vote v group by v.restaurantId order by count (v.restaurantId) desc")
     List<RestaurantTo> getAllWithVotes();
+
+    @Query("select r from Restaurant r where r.id=:id")
+    Optional<Restaurant> getRestById(int id);
 }

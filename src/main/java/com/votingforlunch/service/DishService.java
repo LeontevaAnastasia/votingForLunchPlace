@@ -36,7 +36,7 @@ public class DishService {
     }
 
     public List<Dish> getAllForRestaurant(int restId) {
-        return dishRepository.getAllForRestaurant(restId);
+        return ValidationUtil.checkNotFoundWithId(dishRepository.getAllForRestaurant(restId), restId);
     }
 
     public void update(Dish dish, int restId) {

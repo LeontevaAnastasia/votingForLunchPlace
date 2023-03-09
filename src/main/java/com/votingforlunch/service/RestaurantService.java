@@ -30,7 +30,7 @@ public class RestaurantService {
     }
 
     public Restaurant get(int id) {
-        return checkNotFoundWithId(restaurantRepository.getById(id), id);
+        return checkNotFoundWithId(restaurantRepository.getRestById(id), id);
     }
 
     @Cacheable("restaurants")

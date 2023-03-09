@@ -37,7 +37,7 @@ public class UserService {
 
 
     public User get(int id) {
-        return checkNotFoundWithId(userRepository.getById(id), id);
+        return checkNotFoundWithId(userRepository.getUserById(id), id);
     }
 
     @Cacheable("users")
@@ -65,7 +65,7 @@ public class UserService {
 
     public void update(User user) {
         Assert.notNull(user, "user must not be null");
-        prepareToSave(user);
+        userRepository.save(user);
     }
 
     @Transactional

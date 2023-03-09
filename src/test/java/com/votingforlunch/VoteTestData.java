@@ -24,7 +24,11 @@ public class VoteTestData {
     public static final Vote VOTE3 = new Vote(3, LocalDate.now(), UserTestData.ADMIN_ID, 1);
 
     public static VoteTo getNew() {
-        return new VoteTo(4);
+        return new VoteTo(3);
+    }
+
+    public static Vote createNewFromTo(VoteTo voteTo, int userId) {
+        return new Vote(null, LocalDate.now(), userId, voteTo.getRestaurantId());
     }
 
     public static VoteTo getUpdated() { return new VoteTo(2);}

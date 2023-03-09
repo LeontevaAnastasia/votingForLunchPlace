@@ -7,18 +7,17 @@ import com.votingforlunch.model.Vote;
 import com.votingforlunch.service.VoteService;
 import com.votingforlunch.to.VoteTo;
 import com.votingforlunch.util.exception.DuplVoteException;
-import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
-import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringRunner;
+import org.junit.jupiter.api.Test;
 import java.time.LocalTime;
 import static com.votingforlunch.VoteTestData.VOTE_MATCHER;
+import static com.votingforlunch.VoteTestData.createNewFromTo;
 
 @SpringBootTest
-@RunWith(SpringRunner.class)
 public class VoteServiceTest extends AbstractServiceTest{
+
 
     @Autowired
     VoteService voteService;
@@ -45,10 +44,15 @@ public class VoteServiceTest extends AbstractServiceTest{
         VoteTestData.VOTE_MATCHER.assertMatch(voteService.get(1, UserTestData.USER_ID1), updated);
     }
 
-
-
-
-
-
+    @Test
+    public void create() {
+         voteService.delete(VoteTestData.VOTE_USER1_ID, UserTestData.USER_ID1);
+        Vote created = voteService.createOrUpdate(VoteTestData.getNew(), UserTestData.USER_ID1);
+        int newId = created.id();
+        Vote newVote = createNewFromTo(VoteTestData.getNew(), UserTestData.USER_ID1);
+        newVote.setId(newId);
+        VoteTestData.VOTE_MATCHER.assertMatch(created, newVote);
+        VoteTestData.VOTE_MATCHER.assertMatch(voteService.get(newId, UserTestData.USER_ID1), newVote);
+    }
 
 }

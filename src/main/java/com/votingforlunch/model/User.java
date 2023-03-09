@@ -19,18 +19,19 @@ import java.util.Set;
 @Table(name = "users")
 @Getter
 @Setter
+@ToString
 @AllArgsConstructor
 public class User extends AbstractBaseEntity{
 
     @Column(name = "name")
-    @Size(max = 128)
+    @Size(min =1, max = 128)
     @NoHtml
     private String name;
 
     @Column(name = "email", nullable = false, unique = true)
     @Email
     @NotEmpty
-    @Size(max = 128)
+    @Size(min=1, max = 128)
     @NoHtml
     private String email;
 
@@ -85,9 +86,5 @@ public class User extends AbstractBaseEntity{
         this.roles = roles;
     }
 
-    @Override
-    public String toString() {
-        return "User:" + id + '[' + email + ']';
-    }
 }
 
