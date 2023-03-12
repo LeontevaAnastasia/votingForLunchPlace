@@ -1,6 +1,5 @@
 package com.votingforlunch.json;
 
-import com.votingforlunch.DishesTestData;
 import com.votingforlunch.model.Dish;
 import com.votingforlunch.web.json.JsonUtil;
 import org.junit.jupiter.api.Test;

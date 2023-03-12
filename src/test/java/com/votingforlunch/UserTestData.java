@@ -3,6 +3,7 @@ package com.votingforlunch;
 import com.votingforlunch.model.Role;
 import com.votingforlunch.model.User;
 import com.votingforlunch.to.UserTo;
+import com.votingforlunch.web.json.JsonUtil;
 
 import java.time.LocalDate;
 import java.util.Collections;
@@ -16,6 +17,8 @@ public class UserTestData {
     public static final int USER_ID2 = 2;
     public static final int ADMIN_ID = 3;
     public static final int NOT_FOUND = 10;
+    public static final String USER_MAIL = "user1@gmail.com";
+    public static final String ADMIN_MAIL = "admin@gmail.com";
 
     public static final MatcherFactory.Matcher<User> USER_MATCHER = MatcherFactory.usingIgnoringFieldsComparator(User.class, "registered","password");
 
@@ -38,11 +41,14 @@ public class UserTestData {
         updated.setName("UpdatedName");
         updated.setPassword("updatedPass");
         updated.setEnabled(false);
-        updated.setRoles(Set.of(Role.ADMIN));
         return updated;
     }
 
     public static UserTo getUpdatedTo() {
         return new UserTo(USER_ID1, "upd", "upd@gmail.com", "password");
+    }
+
+    public static String jsonWithPassword(User user, String passw) {
+        return JsonUtil.writeAdditionProps(user, "password", passw);
     }
 }

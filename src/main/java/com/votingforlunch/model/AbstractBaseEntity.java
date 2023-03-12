@@ -1,5 +1,6 @@
 package com.votingforlunch.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.votingforlunch.HasId;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
@@ -25,8 +26,10 @@ public abstract class AbstractBaseEntity implements HasId {
         return id;
     }
 
-    @Schema(hidden = true)
+
+
     @Override
+    @JsonIgnore
     public boolean isNew() {
         return this.id == null;
     }
