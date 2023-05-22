@@ -29,7 +29,7 @@ public class VoteRestController {
     @ResponseStatus(HttpStatus.CREATED)
     public ResponseEntity<Vote> createToWithLocation(@RequestBody VoteTo voteTo) {
         log.info("Create new vote - {}.", voteTo);
-        //заглушка
+
         int userId = SecurityUtil.authUserId();
         Vote created = voteService.createOrUpdate(voteTo, userId);
 
@@ -45,7 +45,7 @@ public class VoteRestController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void update(@RequestBody VoteTo voteTo) {
         log.info("Update vote {}.", voteTo);
-        //заглушка
+
         int userId = SecurityUtil.authUserId();
         voteService.createOrUpdate(voteTo, userId);
     }

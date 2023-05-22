@@ -54,7 +54,8 @@ public class WebSecurityConfig {
         http.authorizeRequests()
          .antMatchers(HttpMethod.POST, "/rest/profile").anonymous()
                 .antMatchers("/rest/profile").authenticated()
-                .antMatchers("/rest/**").hasRole(ADMIN.name())
+                .antMatchers("/rest/restaurants/**").authenticated()
+                .antMatchers("/rest/admin/**").hasRole(ADMIN.name())
                 .and().httpBasic()
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().csrf().disable();

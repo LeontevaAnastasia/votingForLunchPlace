@@ -3,6 +3,7 @@ package com.votingforlunch.model;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.Hibernate;
+import org.hibernate.annotations.Proxy;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -13,6 +14,7 @@ import java.util.Set;
 @Getter
 @Setter
 @AllArgsConstructor
+@Proxy(lazy = false)
 @Table(name = "restaurants", uniqueConstraints = {@UniqueConstraint(columnNames = {"restaurant_name", "address"}, name = "restaurant_unique_name_address_idx")})
 public class Restaurant  extends AbstractBaseEntity {
 
@@ -28,7 +30,7 @@ public class Restaurant  extends AbstractBaseEntity {
 
     @JsonIgnore
     @Enumerated(EnumType.STRING)
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "restaurant")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "restaurant")
     private Set<Dish> dishes;
 
     public Restaurant() {
