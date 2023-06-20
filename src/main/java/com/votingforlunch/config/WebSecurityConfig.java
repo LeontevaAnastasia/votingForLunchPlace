@@ -11,12 +11,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
 
 import java.util.Optional;
 
@@ -28,7 +28,7 @@ import static com.votingforlunch.model.Role.ADMIN;
 @Slf4j
 @AllArgsConstructor
 @Setter
-public class WebSecurityConfig {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserRepository userRepository;
 
     public static final PasswordEncoder PASSWORD_ENCODER = PasswordEncoderFactories.createDelegatingPasswordEncoder();
@@ -49,16 +49,15 @@ public class WebSecurityConfig {
         };
     }
 
-    @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    @Override
+    public void configure (HttpSecurity http) throws Exception {
         http.authorizeRequests()
-         .antMatchers(HttpMethod.POST, "/rest/profile").anonymous()
+                .antMatchers(HttpMethod.POST, "/rest/profile").anonymous()
                 .antMatchers("/rest/profile").authenticated()
                 .antMatchers("/rest/restaurants/**").authenticated()
                 .antMatchers("/rest/admin/**").hasRole(ADMIN.name())
-                .and().httpBasic()
-                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+                .and().formLogin()
+                .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                 .and().csrf().disable();
-        return http.build();
     }
 }
