@@ -3,7 +3,7 @@ package com.votingforlunch.service;
 import com.votingforlunch.model.Restaurant;
 import com.votingforlunch.repository.RestaurantRepository;
 import com.votingforlunch.to.RestaurantTo;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -14,10 +14,11 @@ import java.util.List;
 import static com.votingforlunch.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
+@AllArgsConstructor
 public class RestaurantService {
 
-    @Autowired
-    RestaurantRepository restaurantRepository;
+
+    private final RestaurantRepository restaurantRepository;
 
     @CacheEvict(value = "restaurants", allEntries = true)
     public Restaurant create(Restaurant restaurant) {

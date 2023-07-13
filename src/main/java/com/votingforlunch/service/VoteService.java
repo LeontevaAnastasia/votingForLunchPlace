@@ -6,8 +6,8 @@ import com.votingforlunch.repository.VoteRepository;
 import com.votingforlunch.to.VoteTo;
 import com.votingforlunch.util.ValidationUtil;
 import com.votingforlunch.util.exception.DuplVoteException;
+import lombok.AllArgsConstructor;
 import org.slf4j.Logger;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
 
@@ -19,12 +19,13 @@ import static com.votingforlunch.util.ValidationUtil.checkNotFoundWithId;
 import static org.slf4j.LoggerFactory.getLogger;
 
 @Service
+@AllArgsConstructor
 public class VoteService {
-    @Autowired
-    VoteRepository voteRepository;
 
-    @Autowired
-    RestaurantRepository restaurantRepository;
+    private final VoteRepository voteRepository;
+
+
+    private final RestaurantRepository restaurantRepository;
 
     private static final Logger log = getLogger(VoteService.class);
     private static final LocalTime votingDeadline = LocalTime.of(11, 0);

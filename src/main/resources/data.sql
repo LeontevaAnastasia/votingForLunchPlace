@@ -1,7 +1,7 @@
 INSERT INTO USERS (NAME, EMAIL, PASSWORD)
-VALUES ('User1', 'user1@gmail.com', '{noop}password'),
-       ('User2', 'user2@gmail.com', '{noop}password'),
-       ('Admin', 'admin@gmail.com', '{noop}admin');
+VALUES ('User1', 'user1@gmail.com', '$2a$12$qrLb8Pwpjw0pwAyU3QI/U.Aw.YB27tYRgVlwhmHYmW/FxYOPVBKXW'),
+       ('User2', 'user2@gmail.com', '$2a$12$qrLb8Pwpjw0pwAyU3QI/U.Aw.YB27tYRgVlwhmHYmW/FxYOPVBKXW'),
+       ('Admin', 'admin@gmail.com', '$2a$12$YI3JQuLwQVQ2sCklRmUUHuVWYjMHZ.Y0vTO0QqeMsa35hLHHB9ij2');
 
 INSERT INTO USER_ROLE (ROLE, USER_ID)
 VALUES ('USER', 1),

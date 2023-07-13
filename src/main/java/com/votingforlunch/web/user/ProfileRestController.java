@@ -40,7 +40,7 @@ public class ProfileRestController{
     public ResponseEntity<User> register(@Valid @RequestBody UserTo userTo) {
         log.info("Create new user from to {}", userTo);
         checkNew(userTo);
-        User created = userService.create(UserUtil.prepareToSave(UserUtil.createNewFromTo(userTo)));
+        User created = userService.create(UserUtil.createNewFromTo(userTo));
         URI uriOfNewResource = ServletUriComponentsBuilder.fromCurrentContextPath()
                 .path("/rest/profile")
                 .build()

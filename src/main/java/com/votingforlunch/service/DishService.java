@@ -4,6 +4,7 @@ import com.votingforlunch.model.Dish;
 import com.votingforlunch.repository.DishRepository;
 import com.votingforlunch.repository.RestaurantRepository;
 import com.votingforlunch.util.ValidationUtil;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.Assert;
@@ -13,13 +14,12 @@ import java.util.List;
 import static com.votingforlunch.util.ValidationUtil.checkNotFoundWithId;
 
 @Service
+@AllArgsConstructor
 public class DishService {
 
-    @Autowired
-    DishRepository dishRepository;
+    private final DishRepository dishRepository;
 
-    @Autowired
-    RestaurantRepository restaurantRepository;
+   private final RestaurantRepository restaurantRepository;
 
     public Dish create(Dish dish, int restId) {
         Assert.notNull(dish, "Dish must not be null.");

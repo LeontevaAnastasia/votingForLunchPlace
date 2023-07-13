@@ -9,14 +9,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
 
 import java.util.Optional;
 
@@ -31,22 +32,30 @@ import static com.votingforlunch.model.Role.ADMIN;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserRepository userRepository;
 
-    public static final PasswordEncoder PASSWORD_ENCODER = PasswordEncoderFactories.createDelegatingPasswordEncoder();
+   @Bean
+   public BCryptPasswordEncoder bCryptPasswordEncoder() {
+       return new BCryptPasswordEncoder();
+   }
 
 
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PASSWORD_ENCODER;
-    }
+
 
     @Bean
     public UserDetailsService userDetailsService() {
         return email -> {
             log.debug("Authenticating '{}'", email);
-            Optional<User> optionalUser = userRepository.findByEmailIgnoreCase(email);
+            Optional<User> optionalUser = userRepository.findByEmail(email);
             return new AuthUser(optionalUser.orElseThrow(
                     () -> new UsernameNotFoundException("User '" + email + "' was not found")));
         };
+    }
+
+    @Bean
+    public DaoAuthenticationProvider authProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService());
+        authProvider.setPasswordEncoder(bCryptPasswordEncoder());
+        return authProvider;
     }
 
     @Override
@@ -57,7 +66,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/rest/restaurants/**").authenticated()
                 .antMatchers("/rest/admin/**").hasRole(ADMIN.name())
                 .and().formLogin()
+                .defaultSuccessUrl("/rest/profile")
+                .and()
+                .logout()
+                .logoutUrl("/logout")
+                .logoutSuccessUrl("/rest/profile")
                 .and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.ALWAYS)
                 .and().csrf().disable();
     }
 }
+

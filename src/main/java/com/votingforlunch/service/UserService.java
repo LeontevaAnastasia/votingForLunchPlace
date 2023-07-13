@@ -6,7 +6,8 @@ import com.votingforlunch.to.UserTo;
 import com.votingforlunch.util.UserUtil;
 import com.votingforlunch.util.ValidationUtil;
 import com.votingforlunch.util.exception.NotFoundException;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.CachePut;
 import org.springframework.cache.annotation.Cacheable;
@@ -19,20 +20,23 @@ import org.springframework.util.Assert;
 import java.util.List;
 import java.util.Optional;
 
-import static com.votingforlunch.util.UserUtil.prepareToSave;
 import static com.votingforlunch.util.ValidationUtil.checkNotFoundWithId;
 
+
 @Service
+@AllArgsConstructor
 @Scope(proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserService {
 
-    @Autowired
-    private UserRepository userRepository;
+   private final UserRepository userRepository;
+   BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @CachePut(value = "users", key = "#user.email")
     public User create(User user) {
         Assert.notNull(user, "user must not be null");
-        return userRepository.save(prepareToSave(user));
+        user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+        user.setEmail(user.getEmail());
+        return userRepository.save(user);
     }
 
 
@@ -43,7 +47,7 @@ public class UserService {
     @Cacheable("users")
     public Optional<User> findByEmailIgnoringCase(String email){
         Assert.notNull(email, "email must not be null");
-        return ValidationUtil.checkNotFound(userRepository.findByEmailIgnoreCase(email), "email=" + email);
+        return ValidationUtil.checkNotFound(userRepository.findByEmail(email), "email=" + email);
 
     }
 
@@ -60,7 +64,7 @@ public class UserService {
     public void update(UserTo userTo) {
         Assert.notNull(userTo, "user must not be null");
         User user = get(userTo.getId());
-        prepareToSave(UserUtil.updateFromTo(user, userTo));
+        UserUtil.updateFromTo(user, userTo);
     }
 
     public void update(User user) {
